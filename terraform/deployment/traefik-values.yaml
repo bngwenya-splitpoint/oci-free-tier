@@ -1,0 +1,35 @@
+ingressClass:
+  enabled: true
+  isDefaultClass: true
+
+service:
+  type: LoadBalancer
+
+ports:
+  web:
+    exposedPort: 80
+  websecure:
+    exposedPort: 443
+    tls:
+      enabled: true
+
+additionalArguments:
+  - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+  - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+
+certificatesResolvers:
+  letsencrypt:
+    acme:
+      email: boitumelok.ngwenya@gmail.com
+      storage: /data/acme.json
+      httpChallenge:
+        entryPoint: web
+
+# ✅ Let Helm handle volume + mount via persistence
+persistence:
+  enabled: true
+  existingClaim: traefik-acme-pvc
+
+logs:
+  general:
+    level: INFO
