@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dramatiq-worker
+  labels:
+    app: dramatiq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dramatiq
+  template:
+    metadata:
+      labels:
+        app: dramatiq
+    spec:
+      containers:
+        - name: dramatiq
+          image: af-johannesburg-1.ocir.io/axuvz4vqgovi/mivu/mivu-gui-backend:latest  # ✅ Your full OCIR image path
+          command: ["python", "manage.py", "rundramatiq"]
+          env:
+            - name: DJANGO_SETTINGS_MODULE
+              value: splitpoint.settings
+            - name: REDIS_PASSWORD
+              value: password
+            - name: DATABASE_URL
+              value: postgres://dbuser:password@postgres:5432/dbname  # adjust if needed
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+            requests:
+              cpu: "200m"
+              memory: "256Mi"
+
+
+
+# af-johannesburg-1.ocir.io/axuvz4vqgovi/mivu/mivu-gui-backend:latest

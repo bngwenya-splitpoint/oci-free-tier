@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: django-backend-ingress
+  namespace: mivu-backend
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: backend.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: gunicorn-service
+                port:
+                  number: 8000
+  tls:
+    - hosts:
+        - backend.example.com
+      secretName: backend-tls

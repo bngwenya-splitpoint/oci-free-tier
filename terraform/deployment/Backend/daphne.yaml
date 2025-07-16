@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: daphne
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: daphne
+  template:
+    metadata:
+      labels:
+        app: daphne
+    spec:
+      containers:
+        - name: daphne
+          image: af-johannesburg-1.ocir.io/axuvz4vqgovi/mivu/mivu-gui-backend:latest
+          command: ["daphne", "--bind", "0.0.0.0", "--port", "8001", "splitpoint.asgi:application"]
+          ports:
+            - containerPort: 8001

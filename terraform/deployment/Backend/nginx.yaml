@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:alpine
+          ports:
+            - containerPort: 443
+          volumeMounts:
+            - name: static-files
+              mountPath: /var/www/static
+            - name: nginx-conf
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
+            - name: certs
+              mountPath: /etc/ssl
+      volumes:
+        - name: static-files
+          emptyDir: {}
+        - name: nginx-conf
+          configMap:
+            name: nginx-config
+        - name: certs
+          secret:
+            secretName: nginx-cert

@@ -94,3 +94,18 @@ oci ce node-pool update \
   --node-pool-id ocid1.nodepool.oc1.af-johannesburg-1.aaaaaaaaefm4p7pkty7wdee4d2li5twhsfyutmw7xxnlmirzonspkaojowiq \
   --quantity-per-subnet 2 \
   --force
+
+# Redis Secrets
+ kubectl create secret generic app-secrets \
+  --from-literal=REDIS_PASSWORD=password \
+  --namespace=mivu-backend
+ 
+# pOSTGRES sECRETS
+
+kubectl create secret generic app-secrets \
+  --from-literal=POSTGRES_DB=dbname \
+  --from-literal=POSTGRES_USER=dbuser \
+  --from-literal=POSTGRES_PASSWORD=password \
+  --from-literal=REDIS_PASSWORD=passord \
+  -n mivu-backend
+
