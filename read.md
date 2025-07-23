@@ -99,8 +99,8 @@ oci ce node-pool update \
  kubectl create secret generic app-secrets \
   --from-literal=REDIS_PASSWORD=password \
   --namespace=mivu-backend
- 
-# pOSTGRES sECRETS
+ 1
+# POSTGRES SECRETS
 
 kubectl create secret generic app-secrets \
   --from-literal=POSTGRES_DB=dbname \

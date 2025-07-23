@@ -1,0 +1,27 @@
+name: Build and Push to OCIR
+
+on:
+  push:
+    branches:
+      - mivu-fe-oci-deployment
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Build Docker image
+        run: |
+          docker build -t ${{ secrets.OCIR_REPO }}:latest .
+
+      - name: Authenticate with OCIR
+        run: |
+          echo "${{ secrets.OCIR_PASSWORD }}" | docker login af-johannesburg-1.ocir.io \
+            -u "${{ secrets.OCIR_USERNAME }}" --password-stdin
+
+      - name: Push Docker image
+        run: |
+          docker push ${{ secrets.OCIR_REPO }}:latest

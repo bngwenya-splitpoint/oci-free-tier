@@ -14,8 +14,8 @@ spec:
         app: mivu-gui-fe
     spec:
       containers:
-        - name: mivu-gui-fe
-          image: af-johannesburg-1.ocir.io/axuvz4vqgovi/mivu/mivu-gui-fe:latest
+        - name: self-hosted-fe
+          image: af-johannesburg-1.ocir.io/axuvz4vqgovi/self-hosted-fe:latest
           ports:
             - containerPort: 80
       imagePullSecrets:
