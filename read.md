@@ -14,7 +14,7 @@ or N vaigate in console
 kubectl create secret docker-registry ocir-secret \
   --docker-server=af-johannesburg-1.ocir.io \
   --docker-username="axuvz4vqgovi/boitumelok.ngwenya@gmail.com" \
-  --docker-password=")6vLpqu)w{tqoi7<Ne3F" \
+  --docker-password="" \
   --docker-email="boitumelok.ngwenya@gmail.com"
 
 # KUBERCONFIG
