@@ -24,3 +24,4 @@ override.tf.json
 # CLI configuration for Terraform (usually in user home dir, but just in case)
 .terraformrc
 terraform.rc
+terraform/.terraform/
